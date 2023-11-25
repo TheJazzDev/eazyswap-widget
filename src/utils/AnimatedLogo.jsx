@@ -8,7 +8,7 @@ const stroke = {
       pathLength: 1,
       opacity: 1,
       transition: {
-        pathLength: { delay, type: 'spring', duration: 6, bounce: 0 },
+        pathLength: { delay, type: 'spring', duration: 4, bounce: 0 },
         opacity: { delay, duration: 0.01 },
       },
     };
@@ -19,7 +19,7 @@ const fill = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { delay: 2.5, type: 'spring', duration: 1.5 },
+    transition: { delay: 1.5, type: 'spring', duration: 1 },
   },
 };
 
@@ -36,7 +36,7 @@ const AnimatedLogo = ({ className }) => {
           key={index}
           d={path.d}
           stroke={path.fill}
-          strokeWidth={0.5}
+          strokeWidth={0.7}
           variants={stroke}
         />
       ))}

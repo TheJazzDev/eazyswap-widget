@@ -30,12 +30,12 @@ const WidgetCard = ({ coin }) => {
                   <FontAwesomeIcon
                     icon={formattedChange > 0 ? faArrowUp : faArrowDown}
                     className={
-                      formattedChange > 0 ? 'text-green-600' : 'text-red-600'
+                      formattedChange > 0 ? 'text-green-500' : 'text-red-500'
                     }
                   />
                   <p
                     className={`inline pl-0.5 ${
-                      formattedChange > 0 ? 'text-green-600' : 'text-red-600'
+                      formattedChange > 0 ? 'text-green-500' : 'text-red-500'
                     }`}>
                     {formattedChange}
                   </p>

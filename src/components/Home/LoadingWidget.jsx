@@ -15,8 +15,8 @@ const LoadingWidget = () => {
             </span>
           </span>
           <div className='flex gap-3'>
-            <div className='w-10 md:w-14 h-8 md:h-10 rounded-lg bg-[#4a525d] animate-pulse' />
-            <div className='w-10 md:w-14 h-8 md:h-10 rounded-lg bg-[#4a525d] animate-pulse' />
+            <div className='w-10 md:w-13 h-8 md:h-10 rounded-lg bg-[#4a525d] animate-pulse' />
+            <div className='w-10 md:w-13 h-8 md:h-10 rounded-lg bg-[#4a525d] animate-pulse' />
           </div>
         </div>
         <div className='w-24 h-3 md:h-4 mx-auto md:mx-0 rounded-lg bg-[#4a525d] animate-pulse' />
