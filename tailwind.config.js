@@ -17,7 +17,8 @@ module.exports = {
     fontFamily: {
       'moranga': ['Moranga', 'sans'],
       'poppins': ['Poppins', 'sans-serif'],
-      'cascadia': ['Cascadia-Code', 'Consolas'],
+      'cascadia-italic': ['Cascadia-Code-italic', 'Consolas'],
+      'cascadia-normal': ['Cascadia-Code-light', 'Consolas'],
     },
     extend: {
       screens: {

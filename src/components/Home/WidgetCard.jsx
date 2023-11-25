@@ -8,9 +8,9 @@ const WidgetCard = ({ coin }) => {
       <div className='flex justify-between items-center w-full'>
         <span className='flex items-center gap-4 md:gap-6'>
           <img src={coin.imageUrl} alt={coin.name} className='inline' />
-          <h3 className='text-xl md:text-3xl text-white  inline'>
+          <h3 className='text-xl md:text-3xl text-white font-cascadia-italic inline'>
             {coin.name}{' '}
-            <span className='text-xs md:text-sm text-[#8a919d]'>
+            <span className='text-xs md:text-sm font-cascadia-normal text-[#8a919d]'>
               {coin.symbol}
             </span>
           </h3>
@@ -23,7 +23,9 @@ const WidgetCard = ({ coin }) => {
             const formattedChange = formatPercentageChange(percentageChange);
             return (
               <div key={formattedChange} className='text-xs md:text-sm'>
-                <p className='font-semibold'>{duration}%</p>
+                <p className='font-semibold font-cascadia-italic'>
+                  {duration}%
+                </p>
                 <span>
                   <FontAwesomeIcon
                     icon={formattedChange > 0 ? faArrowUp : faArrowDown}
@@ -43,17 +45,22 @@ const WidgetCard = ({ coin }) => {
           })}
         </div>
       </div>
-      <p className='text-left text-xs md:text-sm'>Coin Rank: {coin.rank}</p>
-      <span className='flex flex-col md:flex-row gap-4 md:gap-0 justify-between'>
-        <p className='text-xs md:text-sm'>
-          <span className='font-semibold'>Price: </span>
+      <p className='md:text-left mx-0 text-xs md:text-sm'>
+        <span className='font-cascadia-italic inline'> Coin Rank: </span>
+        {coin.rank}
+      </p>
+      <div className='flex flex-col md:flex-row gap-4 md:gap-0 justify-between'>
+        <span className='text-xs md:text-sm'>
+          <p className='font-semibold font-cascadia-italic inline'>Price: </p>
           {formatPrice(coin.currentPrice)}
-        </p>
-        <p className='text-xs md:text-sm'>
-          <span className='font-semibold'>Market Cap: </span>
+        </span>
+        <span className='text-xs md:text-sm'>
+          <p className='font-semibold font-cascadia-italic inline'>
+            Market Cap:{' '}
+          </p>
           {formatPrice(coin.marketCap)}
-        </p>
-      </span>
+        </span>
+      </div>
     </li>
   );
 };

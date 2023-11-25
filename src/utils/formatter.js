@@ -3,11 +3,10 @@ export const formatPrice = (number) => {
 };
 
 export const formatPercentageChange = (percentageChange) => {
-  const formattedChange = `${Math.abs(percentageChange).toFixed(2)}%`;
-
-  if (percentageChange > 0) {
-    return parseFloat(formattedChange);
+  if (percentageChange < 0) {
+    const formattedChange = `${Math.abs(percentageChange).toFixed(2)}%`;
+    return formattedChange;
   }
 
-  return parseFloat(formattedChange);
+  return percentageChange.toFixed(2);
 };

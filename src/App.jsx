@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div className='font-cascadia'>
+    <div className='font-cascadia-normal'>
       <Outlet />
     </div>
   );

@@ -17,6 +17,12 @@ const Home = () => {
   if (status === 'pending' || error) {
     return (
       <Layout>
+        {error && (
+          <p className='text-white text-sm md:text-base mx-auto max-w-2xl'>
+            It seems that retrieving the data is taking longer than expected.
+            Don't worry; we'll attempt to refresh and fetch the data again.
+          </p>
+        )}
         <LoadingWidget />
       </Layout>
     );

@@ -10,8 +10,13 @@
 }
 
 @font-face {
-  font-family: 'Cascadia-Code';
+  font-family: 'Cascadia-Code-italic';
   src: url('../fonts/CascadiaMono-Italic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Cascadia-Code-normal';
+  src: url('../fonts/CascadiaCode-Light.otf') format('opentype');
 }
 
 :root {

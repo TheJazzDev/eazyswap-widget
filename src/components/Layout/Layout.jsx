@@ -6,7 +6,7 @@ import {
   DropdownItem,
   Avatar,
 } from '@nextui-org/react';
-import Logo from '../../assets/logo.png';
+import AnimatedLogo from '../../utils/AnimatedLogo';
 
 const Layout = ({ children }) => {
   const { user, logout } = useAuthContext();
@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
     <main className='pb-8'>
       <nav className='sticky top-0 z-10 bg-[#111827]/70 backdrop-blur-xl flex justify-between items-center text-white py-3 px-4 md:px-8 border-b border-gray-700'>
         <a href='/'>
-          <img src={Logo} alt='Logo' />
+          <AnimatedLogo className='w-40' />
         </a>
         {user ? (
           <Dropdown placement='bottom-end'>
