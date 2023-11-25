@@ -91,8 +91,8 @@ VITE_FIREBASE_MEASUREMENT_ID=
   project-root/
   │
   ├── font/
+  │ ├── CascadiaCode-Light.otf
   │ ├── CascadiaMono-Italic.otf
-  │ ├── Moranga-Regular.otf
   │ └── ...
   │
   ├── node_modules/

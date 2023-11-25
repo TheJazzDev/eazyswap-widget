@@ -5,18 +5,15 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Moranga';
-  src: url('../fonts/Moranga-Regular.otf') format('opentype');
-}
-
-@font-face {
   font-family: 'Cascadia-Code-italic';
   src: url('../fonts/CascadiaMono-Italic.otf') format('opentype');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Cascadia-Code-normal';
   src: url('../fonts/CascadiaCode-Light.otf') format('opentype');
+  font-display: swap;
 }
 
 :root {

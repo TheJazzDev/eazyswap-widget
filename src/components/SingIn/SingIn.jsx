@@ -49,13 +49,13 @@ const SignIn = () => {
         </h5>
         <button
           onClick={handleSignupWithGoogle}
-          className='flex items-center bg-white/70 text-center mx-auto rounded-lg shadow-md px-6 py-3 text-sm font-bold text-gray-900 hover:text-slate-100 hover:bg-gray-600 transition-all duration-300 ease-in-out'>
+          className='flex items-center bg-white/90 text-center mx-auto rounded-lg shadow-md px-6 py-3 text-sm font-bold text-gray-900 hover:text-slate-100 hover:bg-gray-500 transition-all duration-300 ease-in-out'>
           <img src={GoogleIcon} alt='google' className='w-6 h-6 mr-4' />
           <span className='text-lg'>Continue with Google</span>
         </button>
         <button
           onClick={handleSignupWithGithub}
-          className='flex items-center bg-white/70 text-center mx-auto rounded-lg shadow-md px-6 py-3 text-sm font-bold text-gray-900 hover:text-slate-100 hover:bg-gray-600 transition-all duration-300 ease-in-out'>
+          className='flex items-center bg-white/90 text-center mx-auto rounded-lg shadow-md px-6 py-3 text-sm font-bold text-gray-900 hover:text-slate-100 hover:bg-gray-500 transition-all duration-300 ease-in-out'>
           <img src={GithubIcon} alt='google' className='w-6 h-6 mr-4' />
           <span className='text-lg'>Continue with Github</span>
         </button>

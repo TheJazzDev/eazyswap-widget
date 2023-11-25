@@ -15,7 +15,6 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'moranga': ['Moranga', 'sans'],
       'poppins': ['Poppins', 'sans-serif'],
       'cascadia-italic': ['Cascadia-Code-italic', 'Consolas'],
       'cascadia-normal': ['Cascadia-Code-light', 'Consolas'],
