@@ -1,37 +1,40 @@
-import { useQuery } from '@tanstack/react-query';
-import { getCoins } from '../../api/getCoins';
+import { Link } from 'react-router-dom';
 import WidgetCard from './WidgetCard';
 import LoadingWidget from './LoadingWidget';
-import Layout from './Layout';
+import HomeLayout from './HomeLayout';
+import useCoinQuery from '../../hooks/useCoinQuery';
 
 const Home = () => {
-  const { status, error, data } = useQuery({
-    queryKey: ['coins'],
-    queryFn: getCoins,
-    staleTime: 3600000,
-    cacheTime: 7200000,
-    retry: 3,
-    retryDelay: 60000,
-  });
+  const { isLoading, error, data } = useCoinQuery();
 
-  if (status === 'pending' || error) {
+  if (isLoading || error) {
     return (
-      <Layout>
-        {error && (
+      <HomeLayout>
+        {isLoading && error && (
           <p className='text-white text-sm md:text-base mx-auto max-w-2xl'>
             It seems that retrieving the data is taking longer than expected.
-            Don't worry; we'll attempt to refresh and fetch the data again.
+            Don't worry; we are attempting to refresh and fetch the data again.
+          </p>
+        )}
+        {error && (
+          <p className='text-white text-sm md:text-base mx-auto max-w-2xl'>
+            We encountered an error fetching coin data. Don't worry; we'll
+            attempt to refresh and fetch the data again.
           </p>
         )}
         <LoadingWidget />
-      </Layout>
+      </HomeLayout>
     );
   }
 
   return (
-    <Layout>
-      {data && data.map((coin) => <WidgetCard key={coin.name} coin={coin} />)}
-    </Layout>
+    <HomeLayout>
+      {data.map((coinInfo) => (
+        <Link key={coinInfo.symbol} to={`/${coinInfo.symbol}`}>
+          <WidgetCard coinInfo={coinInfo} />
+        </Link>
+      ))}
+    </HomeLayout>
   );
 };
 

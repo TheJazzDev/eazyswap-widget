@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Error404 = () => {
   return (
@@ -35,7 +36,7 @@ const Error404 = () => {
           </div>
         </div>
         <div className='text-sm text-blue-400 mt-12 text-center cursor-pointer underline'>
-          <a href='/'>Go back home</a>
+          <Link to='/'>Go back home</Link>
         </div>
       </div>
     </div>

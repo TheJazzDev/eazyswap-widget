@@ -5,7 +5,7 @@ const LoadingWidget = () => {
     (skeleton) => (
       <li
         key={skeleton}
-        className='space-y-5 md:space-y-5 p-4 rounded-xl bg-card-background max-w-2xl border border-gray-700 mx-auto'>
+        className='space-y-5 md:space-y-5 p-4 rounded-xl bg-card-background w-full md:max-w-2xl lg:w-[500px] border border-gray-700 mx-auto'>
         <div className='flex justify-between items-center w-full'>
           <span className='flex items-center gap-4 md:gap-6'>
             <div className='flex w-[50px] h-[50px] md:w-13 md:h-13 rounded-full bg-[#4a525d] animate-pulse' />

@@ -8,7 +8,7 @@ const stroke = {
       pathLength: 1,
       opacity: 1,
       transition: {
-        pathLength: { delay, type: 'spring', duration: 4, bounce: 0 },
+        pathLength: { delay, type: 'spring', duration: 3, bounce: 0 },
         opacity: { delay, duration: 0.01 },
       },
     };
