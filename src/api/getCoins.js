@@ -22,7 +22,6 @@ async function fetchCoinData(symbol) {
     if (coinInfoResponse.status === 200 && marketChartResponse.status === 200) {
       const coinInfo = coinInfoResponse.data;
       const marketChartData = marketChartResponse.data;
-      // console.log(coinInfo)
 
       // Extracting the latest two data points for hourly change calculation
       const latestDataPoint =
@@ -38,19 +37,22 @@ async function fetchCoinData(symbol) {
 
       return {
         name: coinInfo.name,
+        percentageChange_1h,
         symbol: coinInfo.symbol,
         rank: coinInfo.coingecko_rank,
         categories: coinInfo.categories,
         website: coinInfo.links.homepage[0],
-        imageUrlSmall: coinInfo.image?.small,
-        imageUrlLarge: coinInfo.image?.large,
-        description: coinInfo.description?.en,
+        imageUrlSmall: coinInfo.image.small,
+        imageUrlLarge: coinInfo.image.large,
+        description: coinInfo.description.en,
         maxSupply: coinInfo.market_data.max_supply,
         marketCap: coinInfo.market_data.market_cap.usd,
+        volume: coinInfo.market_data.total_volume.usd,
         currentPrice: coinInfo.market_data.current_price.usd,
         circulatingSupply: coinInfo.market_data.circulating_supply,
+        percentageChange_7d: coinInfo.market_data.price_change_percentage_7d,
         percentageChange_24h: coinInfo.market_data.price_change_percentage_24h,
-        percentageChange_1h,
+        percentageChange_30d: coinInfo.market_data.price_change_percentage_30d,
       };
     } else {
       throw new Error(`Error fetching CoinGecko data for ${symbol}`);

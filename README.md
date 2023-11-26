@@ -140,6 +140,9 @@ VITE_FIREBASE_MEASUREMENT_ID=
   │ │ ├── AuthGuard.jsx
   │ │ ├── ProtectedRoute.jsx
   │ │ └── ...
+  │ ├── hooks/
+  │ │ ├── useCoinQuery.js
+  │ │ └── ...
   │ ├── pages/
   │ │ ├── Homepage.jsx
   │ │ ├── SigninPage.jsx
@@ -202,6 +205,8 @@ VITE_FIREBASE_MEASUREMENT_ID=
   - **context/:** Context-related files.
 
   - **guards/:** Guard components for route protection.
+
+  - **hooks/:** Custom hooks used in the project.
 
   - **pages/:** React components representing different pages of the application.
 

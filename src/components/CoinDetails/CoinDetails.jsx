@@ -1,7 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useCoinsQuery } from '../../hooks/useCoinQuery';
-import { formatNum, formatPrice } from '../../utils/formatter';
+import {
+  formatNum,
+  formatPercentageChange,
+  formatPrice,
+} from '../../utils/formatter';
 import parse from 'html-react-parser';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 const CoinDetails = () => {
   const { symbol } = useParams();
@@ -49,6 +55,7 @@ const CoinDetails = () => {
             ['Coin Ranking', selectedCoin.rank],
             ['Price', formatPrice(selectedCoin.currentPrice)],
             ['Market Capitalization', formatPrice(selectedCoin.marketCap)],
+            ['Volume', formatPrice(selectedCoin.volume)],
             ['Max Supply', formatNum(selectedCoin.maxSupply)],
             ['Circulating Supply', formatNum(selectedCoin.circulatingSupply)],
             ['Categories', selectedCoin.categories.join(', ')],
@@ -73,6 +80,37 @@ const CoinDetails = () => {
             </span>
           ))}
         </div>
+      </div>
+      <div className='flex gap-4 lg:gap-8'>
+        {[
+          [selectedCoin.percentageChange_1h, '1h'],
+          [selectedCoin.percentageChange_24h, '24h'],
+          [selectedCoin.percentageChange_7d, '7d'],
+          [selectedCoin.percentageChange_30d, '30d'],
+        ].map(([percentageChange, duration]) => {
+          const formattedChange = formatPercentageChange(percentageChange);
+          return (
+            <div key={duration} className='text-sm md:text-base'>
+              <p className='text-center font-semibold font-cascadia-italic'>
+                {duration}
+              </p>
+              <span>
+                <FontAwesomeIcon
+                  icon={formattedChange > 0 ? faArrowUp : faArrowDown}
+                  className={
+                    formattedChange > 0 ? 'text-green-500' : 'text-red-500'
+                  }
+                />
+                <p
+                  className={`inline pl-0.5 md:pl-1 ${
+                    formattedChange > 0 ? 'text-green-500' : 'text-red-500'
+                  }`}>
+                  {formattedChange}
+                </p>
+              </span>
+            </div>
+          );
+        })}
       </div>
       <div>
         <p className='text-base md:text-lg text-justify '>
