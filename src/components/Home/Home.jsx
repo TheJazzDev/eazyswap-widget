@@ -24,16 +24,15 @@ const Home = () => {
   return (
     <HomeLayout>
       {data.map((coinInfo) => (
-        <Link key={coinInfo.symbol} to={`/${coinInfo.symbol}`}>
-          <Tooltip
-            content={`Click for more ${coinInfo.symbol.toUpperCase()} details`}
-            color='success'
-            offset={-90}>
-            <ForwardedLink to={`/${coinInfo.symbol}`}>
-              <WidgetCard coinInfo={coinInfo} />
-            </ForwardedLink>
-          </Tooltip>
-        </Link>
+        <Tooltip
+          key={coinInfo.symbol}
+          content={`Click for more ${coinInfo.symbol.toUpperCase()} details`}
+          color='success'
+          offset={-90}>
+          <ForwardedLink to={`/${coinInfo.symbol}`}>
+            <WidgetCard coinInfo={coinInfo} />
+          </ForwardedLink>
+        </Tooltip>
       ))}
     </HomeLayout>
   );
