@@ -1,4 +1,6 @@
+import { useRef, useLayoutEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import gsap from 'gsap';
 import { useCoinsQuery } from '../../hooks/useCoinQuery';
 import {
   formatNum,
@@ -6,39 +8,54 @@ import {
   formatPrice,
 } from '../../utils/formatter';
 import parse from 'html-react-parser';
+import LoadingText from '../LoadingText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { getCoinPercentage, getCoinStats } from './CoinInfo';
 
 const CoinDetails = () => {
   const { symbol } = useParams();
   const { isLoading, error, data } = useCoinsQuery();
+  const details = useRef();
+  const tl = useRef();
 
   const selectedCoin = Array.isArray(data)
     ? data.find((coin) => symbol === coin.symbol)
     : null;
 
+  useLayoutEffect(() => {
+    let ctx =
+      data &&
+      gsap.context(() => {
+        tl.current = gsap
+          .timeline({
+            defaults: { opacity: 0, duration: 0.5, ease: 'back', delay: 1 },
+          })
+          .from('img', { scale: 0, duration: 1 })
+          .from('h3, .coinStats', { x: 100, stagger: 0.2 }, '-0.2')
+          .from('.coinPercentage', { scale: 0, stagger: 0.2 }, '0.4')
+          .from('.description', { y: 100 }, '<0.2');
+      }, details);
+
+    return () => ctx && ctx.revert();
+  }, []);
+
   if (isLoading || error) {
     return (
-      <div className='h-screen flex items-center justify-center p-6'>
-        {isLoading && (
-          <p className='text-white text-sm md:text-base mx-auto max-w-2xl'>
-            It seems that retrieving the data is taking longer than expected.
-            Don't worry; we are attempting to refresh and fetch the data again.
-          </p>
-        )}
-        {error && (
-          <p className='text-white text-sm md:text-base mx-auto max-w-2xl'>
-            We encountered an error fetching coin data. Don't worry; we'll
-            attempt to refresh and fetch the data again.
-          </p>
-        )}
+      <div className='h-screen flex items-center justify-center p-6 text-white text-7xl'>
+        <LoadingText isLoading={isLoading} error={error} />
       </div>
     );
   }
 
+  const coinStats = getCoinStats(selectedCoin, formatPrice, formatNum);
+  const coinPercentage = getCoinPercentage(selectedCoin);
+
   return (
-    <div className='flex flex-col items-center justify-center gap-8 px-4 md:px-6 text-[#8a919d] max-w-4xl mx-auto pb-12 mt-24'>
-      <div className=''>
+    <section
+      ref={details}
+      className='flex flex-col items-center justify-center gap-8 px-4 md:px-6 text-[#8a919d] max-w-4xl mx-auto pb-12 mt-24 overflow-hidden'>
+      <div className='w-full'>
         <img
           src={selectedCoin.imageUrlLarge}
           alt='Coin Image'
@@ -51,28 +68,10 @@ const CoinDetails = () => {
               {selectedCoin.symbol}
             </span>
           </h3>
-          {[
-            ['Coin Ranking', selectedCoin.rank],
-            ['Price', formatPrice(selectedCoin.currentPrice)],
-            ['Market Capitalization', formatPrice(selectedCoin.marketCap)],
-            ['Volume', formatPrice(selectedCoin.volume)],
-            ['Max Supply', formatNum(selectedCoin.maxSupply)],
-            ['Circulating Supply', formatNum(selectedCoin.circulatingSupply)],
-            ['Categories', selectedCoin.categories.join(', ')],
-            [
-              'Website',
-              <a
-                href={selectedCoin.website}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-blue-500'>
-                {selectedCoin.website}
-              </a>,
-            ],
-          ].map(([label, value]) => (
+          {coinStats.map(([label, value]) => (
             <span
               key={label}
-              className='md:text-left mx-0 text-sm md:text-base block'>
+              className='md:text-left mx-0 text-sm md:text-base block coinStats'>
               <p className='font-semibold font-cascadia-italic inline max-w-sm'>
                 {label}:{' '}
               </p>
@@ -82,15 +81,10 @@ const CoinDetails = () => {
         </div>
       </div>
       <div className='flex gap-4 lg:gap-8'>
-        {[
-          [selectedCoin.percentageChange_1h, '1h'],
-          [selectedCoin.percentageChange_24h, '24h'],
-          [selectedCoin.percentageChange_7d, '7d'],
-          [selectedCoin.percentageChange_30d, '30d'],
-        ].map(([percentageChange, duration]) => {
+        {coinPercentage.map(([percentageChange, duration]) => {
           const formattedChange = formatPercentageChange(percentageChange);
           return (
-            <div key={duration} className='text-sm md:text-base'>
+            <div key={duration} className='text-sm md:text-base coinPercentage'>
               <p className='text-center font-semibold font-cascadia-italic'>
                 {duration}
               </p>
@@ -113,11 +107,11 @@ const CoinDetails = () => {
         })}
       </div>
       <div>
-        <p className='text-base md:text-lg text-justify '>
+        <p className='text-base md:text-lg text-justify description'>
           {parse(selectedCoin.description)}
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 

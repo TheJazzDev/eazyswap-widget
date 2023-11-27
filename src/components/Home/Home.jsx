@@ -1,8 +1,13 @@
+import { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import WidgetCard from './WidgetCard';
 import LoadingWidget from './LoadingWidget';
 import HomeLayout from './HomeLayout';
 import useCoinQuery from '../../hooks/useCoinQuery';
+import LoadingText from '../LoadingText';
+import { Tooltip } from '@nextui-org/react';
+
+const ForwardedLink = forwardRef((props, ref) => <Link ref={ref} {...props} />);
 
 const Home = () => {
   const { isLoading, error, data } = useCoinQuery();
@@ -10,18 +15,7 @@ const Home = () => {
   if (isLoading || error) {
     return (
       <HomeLayout>
-        {isLoading && error && (
-          <p className='text-white text-sm md:text-base mx-auto max-w-2xl'>
-            It seems that retrieving the data is taking longer than expected.
-            Don't worry; we are attempting to refresh and fetch the data again.
-          </p>
-        )}
-        {error && (
-          <p className='text-white text-sm md:text-base mx-auto max-w-2xl'>
-            We encountered an error fetching coin data. Don't worry; we'll
-            attempt to refresh and fetch the data again.
-          </p>
-        )}
+        <LoadingText isLoading={isLoading} error={error} />
         <LoadingWidget />
       </HomeLayout>
     );
@@ -31,7 +25,14 @@ const Home = () => {
     <HomeLayout>
       {data.map((coinInfo) => (
         <Link key={coinInfo.symbol} to={`/${coinInfo.symbol}`}>
-          <WidgetCard coinInfo={coinInfo} />
+          <Tooltip
+            content={`Click for more ${coinInfo.symbol.toUpperCase()} details`}
+            color='success'
+            offset={-90}>
+            <ForwardedLink to={`/${coinInfo.symbol}`}>
+              <WidgetCard coinInfo={coinInfo} />
+            </ForwardedLink>
+          </Tooltip>
         </Link>
       ))}
     </HomeLayout>

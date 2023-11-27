@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className='font-cascadia-normal'>
+    <div className='font-cascadia-normal select-none'>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <NextUIProvider>
